@@ -1,0 +1,122 @@
+{
+  "id": "python",
+  "name": "Python",
+  "extensions": [
+    ".py",
+    ".pyi",
+    ".pyw"
+  ],
+  "filenames": [
+    "SConstruct",
+    "SConscript"
+  ],
+  "detect": "^#!.*\\bpython",
+  "states": {
+    "root": [
+      {
+        "token": "comment",
+        "regex": "#.*"
+      },
+      {
+        "token": "meta",
+        "regex": "^\\s*@[\\w.]+"
+      },
+      {
+        "token": "string",
+        "regex": "[rRbBuUfF]{0,2}\"\"\"",
+        "next": "tdq"
+      },
+      {
+        "token": "string",
+        "regex": "[rRbBuUfF]{0,2}'''",
+        "next": "tsq"
+      },
+      {
+        "token": "string",
+        "regex": "[rRbBuUfF]{0,2}(?:\"(?:[^\"\\\\]|\\\\.)*\"?|'(?:[^'\\\\]|\\\\.)*'?)"
+      },
+      {
+        "token": "number",
+        "regex": "\\b(?:0[xX][\\da-fA-F_]+|0[bB][01_]+|0[oO][0-7_]+|\\d[\\d_]*(?:\\.\\d[\\d_]*)?(?:[eE][+-]?\\d+)?[nfFlLuU]?)\\b|\\.\\d+\\b"
+      },
+      {
+        "token": "keyword",
+        "regex": "\\b(?:and|as|assert|async|await|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|raise|return|try|while|with|yield|match|case)\\b"
+      },
+      {
+        "token": "constant",
+        "regex": "\\b(?:True|False|None|NotImplemented|Ellipsis|__\\w+__)\\b"
+      },
+      {
+        "token": "variable",
+        "regex": "\\b(?:self|cls)\\b"
+      },
+      {
+        "token": "builtin",
+        "regex": "\\b(?:print|len|range|enumerate|zip|map|filter|sorted|reversed|isinstance|issubclass|getattr|setattr|hasattr|super|open|int|str|float|bool|list|dict|set|tuple|bytes|type|object|min|max|sum|any|all|abs|repr|iter|next|id|hash|vars|dir|input)\\b(?=\\s*\\()"
+      },
+      {
+        "token": "function",
+        "regex": "(?<=\\bdef\\s+)\\w+"
+      },
+      {
+        "token": "type",
+        "regex": "(?<=\\bclass\\s+)\\w+"
+      },
+      {
+        "token": "type",
+        "regex": "\\b[A-Z][a-z0-9]\\w*\\b"
+      },
+      {
+        "token": "function",
+        "regex": "[A-Za-z_$][\\w$]*(?=\\s*\\()"
+      },
+      {
+        "token": "property",
+        "regex": "(?<=\\.)[A-Za-z_]\\w*"
+      },
+      {
+        "token": "text",
+        "regex": "[A-Za-z_]\\w*"
+      },
+      {
+        "token": "operator",
+        "regex": "[-+*/%=<>!&|^~?:]+"
+      },
+      {
+        "token": "punctuation",
+        "regex": "[{}()\\[\\];,.]"
+      }
+    ],
+    "tdq": [
+      {
+        "token": "string",
+        "regex": "\"\"\"",
+        "next": "@pop"
+      },
+      {
+        "token": "escape",
+        "regex": "\\\\."
+      },
+      {
+        "token": "string",
+        "regex": "[^\"\\\\]+|\""
+      }
+    ],
+    "tsq": [
+      {
+        "token": "string",
+        "regex": "'''",
+        "next": "@pop"
+      },
+      {
+        "token": "escape",
+        "regex": "\\\\."
+      },
+      {
+        "token": "string",
+        "regex": "[^'\\\\]+|'"
+      }
+    ]
+  }
+}

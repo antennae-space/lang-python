@@ -1,0 +1,93 @@
+{
+  "$schema": "https://raw.githubusercontent.com/antennae-space/plugin-sdk/v1.6.0/plugin.schema.json",
+  "id": "lang-python",
+  "name": "Python",
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "ide": ">=1.24.0 <2",
+  "assets": "https://github.com/antennae-space/lang-python/releases/download/v{version}/lang-python-{arch}.tar.gz",
+  "permissions": [
+    "program:pyright-langserver",
+    "program:basedpyright-langserver",
+    "program:pylsp",
+    "path:NODE",
+    "path:PYRIGHT",
+    "path:BASEDPYRIGHT",
+    "path:PYLSP"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "python",
+        "name": "Python",
+        "extensions": [
+          ".py",
+          ".pyi",
+          ".pyw"
+        ],
+        "markers": [
+          "pyproject.toml",
+          "setup.py",
+          "requirements.txt",
+          "Pipfile"
+        ],
+        "grammar": "grammars/python.json",
+        "servers": [
+          {
+            "argv": [
+              "pyright-langserver",
+              "--stdio"
+            ],
+            "paths": [
+              {
+                "name": "NODE",
+                "candidates": [
+                  "@node/../.."
+                ]
+              },
+              {
+                "name": "PYRIGHT",
+                "candidates": [
+                  "@pyright-langserver/.."
+                ]
+              }
+            ],
+            "pathDirs": [
+              "NODE/bin"
+            ]
+          },
+          {
+            "argv": [
+              "basedpyright-langserver",
+              "--stdio"
+            ],
+            "paths": [
+              {
+                "name": "BASEDPYRIGHT",
+                "candidates": [
+                  "@basedpyright-langserver/../.."
+                ]
+              }
+            ]
+          },
+          {
+            "argv": [
+              "pylsp"
+            ],
+            "paths": [
+              {
+                "name": "PYLSP",
+                "candidates": [
+                  "@pylsp/../.."
+                ]
+              }
+            ]
+          }
+        ],
+        "tests": {
+          ".py": "test_{name}.py"
+        }
+      }
+    ]
+  }
+}
