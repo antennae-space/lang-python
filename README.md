@@ -4,6 +4,7 @@ The Python language pack of [Web IDE](https://github.com/antennae-space/web-ide)
 
 ## What it needs
 
+- **Install from the IDE**: a Python file without a server shows a banner (also in *Settings → Plugins*): pyright through npm, or else basedpyright or pylsp in a virtualenv, run by the IDE in a console, into its own folder (`~/.local/share/web-ide/tools/lang-python`).
 - One of, in this order: **pyright** (`npm install -g pyright`), **basedpyright** (`pipx install basedpyright`), **pylsp** (`pipx install 'python-lsp-server[all]'`: without pyflakes it reports no error), on your PATH.
 - The IDE runs it **confined**: it reads your project (not write; its virtualenv included), the program and its package (pyright: the node on your PATH, `NODE`, and its package; basedpyright and pylsp: their virtualenv, or the `~/.local` of a `pip --user` install), keeps its caches in its own folder, and has no network.
 - On a project over SSH, the server runs on its host, as you installed it there.
